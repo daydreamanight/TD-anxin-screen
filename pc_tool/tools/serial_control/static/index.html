@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>安芯讯屏串口控制台</title><link rel="stylesheet" href="/style.css"></head>
+<body><main>
+<section class="bar">
+  <h1>安芯讯屏串口控制台</h1>
+  <div class="link">
+    <select id="port" aria-label="端口号"><option value="">请选择</option></select>
+    <span class="format">115200 8N1</span>
+    <button id="connect" class="primary" disabled>连接</button>
+    <button id="disconnect" disabled>断开</button>
+    <button id="refresh">刷新</button>
+    <span class="state"><span id="connection-dot" class="dot"></span><strong id="connection-label">未连接</strong></span>
+  </div>
+  <div id="notice" class="notice" role="status" hidden></div>
+</section>
+
+<section class="ctrl">
+  <h2>发送命令</h2>
+  <div class="nav">
+    <button id="prev" disabled>← 上一页</button>
+    <button id="next" disabled>下一页 →</button>
+  </div>
+  <label class="field" for="page">指定页面</label>
+  <div class="goto-row">
+    <select id="page">
+      <option value="1">PIC 1 · 今日通知</option>
+      <option value="2">PIC 2 · 消防疏散演练</option>
+      <option value="3">PIC 3 · 天气与停电提示</option>
+      <option value="4">PIC 4 · 活动日引导</option>
+      <option value="5">PIC 5 · 设备与操作说明</option>
+    </select>
+    <button id="goto" disabled>切换</button>
+  </div>
+  <span class="field">播放模式</span>
+  <div class="modes">
+    <button id="manual" disabled>手动</button>
+    <button id="auto" disabled>自动轮播</button>
+  </div>
+  <button id="query" class="wide" disabled>查询设备状态</button>
+  <button id="retry" class="wide" hidden>重发</button>
+</section>
+
+<section class="dev">
+  <div class="current"><span>当前页面</span><strong id="current-page">—</strong></div>
+  <div class="stats">
+    <div><span>模式</span><strong id="mode">—</strong></div>
+    <div><span>页面状态</span><strong id="loading">—</strong></div>
+    <div><span>应急锁定</span><strong id="locked">—</strong></div>
+    <div><span>目标页面</span><strong id="target-page">—</strong></div>
+  </div>
+</section>
+
+<section class="log">
+  <div class="log-head"><h2>通信记录</h2><button id="clear">清空</button></div>
+  <div id="log-wrap" class="log-wrap"><table>
+    <thead><tr><th class="c-time">时间</th><th class="c-dir">方向</th><th class="c-raw">原始数据</th><th>解析</th></tr></thead>
+    <tbody id="wire"></tbody>
+  </table></div>
+</section>
+
+<section class="free">
+  <input id="free-input" aria-label="发送数据" placeholder="HEX" spellcheck="false" disabled>
+  <button id="free-send" disabled>发送</button>
+</section>
+</main><script src="/app.js"></script></body></html>

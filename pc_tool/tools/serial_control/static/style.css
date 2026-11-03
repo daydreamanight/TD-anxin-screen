@@ -1,0 +1,78 @@
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { background: #eef1f5; color: #1f2933; font: 16px/1.4 "Microsoft YaHei UI", "Microsoft YaHei", "Noto Sans SC", "Segoe UI", sans-serif; }
+h1 { margin: 0; font-size: 20px; color: #111827; white-space: nowrap; }
+h2 { margin: 0; font-size: 16px; color: #2f6fb7; }
+[hidden] { display: none !important; }
+
+button, select, input { font: inherit; color: #1f2933; background: #fff; border: 1px solid #c5ced8; border-radius: 6px; min-height: 36px; padding: 2px 12px; }
+select { padding: 2px 6px; }
+button { cursor: pointer; font-weight: 600; white-space: nowrap; }
+button:hover:not(:disabled) { border-color: #2f6fb7; color: #2f6fb7; }
+button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid #2f6fb7; outline-offset: 1px; }
+button:disabled, input:disabled { color: #9aa5b1; background: #f3f5f7; cursor: not-allowed; }
+button.primary:not(:disabled) { background: #2f6fb7; border-color: #2f6fb7; color: #fff; }
+button.on:not(:disabled), button.on:hover:not(:disabled) { background: #2f6fb7; border-color: #2f6fb7; color: #fff; }
+
+main { height: 100vh; min-height: 560px; display: grid; gap: 10px; padding: 10px; }
+section { background: #fff; border: 1px solid #dfe4ea; border-radius: 8px; min-width: 0; }
+
+.bar { grid-area: bar; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 8px 14px; }
+.link { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.format { color: #52606d; font-family: Consolas, monospace; font-size: 15px; white-space: nowrap; }
+.state { display: inline-flex; align-items: center; gap: 6px; min-width: 76px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; background: #b0b8c1; flex: none; }
+.dot.ready { background: #16a34a; }
+.notice { width: 100%; color: #b42318; background: #fef3f2; border-radius: 4px; padding: 4px 8px; font-size: 14px; }
+
+.ctrl { grid-area: ctrl; display: flex; flex-direction: column; gap: 10px; padding: 12px 14px; }
+.nav, .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.nav button { min-height: 64px; font-size: 18px; padding: 2px 4px; }
+.modes button { min-height: 48px; padding: 2px 4px; }
+.field { color: #52606d; font-size: 14px; margin: 6px 0 -4px; }
+.goto-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+.goto-row select, .goto-row button { min-height: 46px; }
+.goto-row select { width: 100%; }
+.wide { width: 100%; min-height: 48px; margin-top: 4px; }
+
+.dev { grid-area: dev; display: flex; gap: 12px; padding: 12px 14px; }
+.current { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2px; min-width: 170px; background: #f4f8fc; border-radius: 6px; padding: 8px 14px; }
+.current span, .stats span { color: #52606d; font-size: 14px; }
+#current-page { font-size: 46px; line-height: 1.1; color: #2f6fb7; white-space: nowrap; }
+.stats { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.stats > div { display: flex; flex-direction: column; justify-content: center; background: #f6f8fa; border-radius: 6px; padding: 6px 12px; }
+.stats strong { font-size: 19px; }
+.stats strong.alarm { color: #c81e1e; }
+
+.log { grid-area: log; display: flex; flex-direction: column; min-height: 0; }
+.log-head { display: flex; align-items: center; justify-content: space-between; padding: 6px 14px; border-bottom: 1px solid #dfe4ea; }
+.log-head button { min-height: 28px; font-size: 14px; font-weight: 500; }
+.log-wrap { flex: 1; min-height: 0; overflow: auto; }
+table { width: 100%; border-collapse: collapse; }
+th { position: sticky; top: 0; background: #fff; color: #52606d; font-size: 14px; font-weight: 600; text-align: left; padding: 4px 12px; border-bottom: 1px solid #dfe4ea; }
+td { padding: 3px 12px; vertical-align: top; font-size: 15px; }
+tbody tr:nth-child(even) { background: #fafbfc; }
+.c-time { width: 92px; }
+.c-dir { width: 56px; }
+.c-raw { width: 46%; }
+.mono { font: 13.5px/1.6 Consolas, "Courier New", monospace; word-break: break-all; }
+.tx { color: #1d6fd1; font-weight: 700; }
+.rx { color: #15803d; font-weight: 700; }
+.ok { color: #15803d; font-weight: 600; }
+.bad { color: #c81e1e; font-weight: 600; }
+.warn { color: #b45309; font-weight: 600; }
+
+.free { grid-area: free; gap: 8px; padding: 8px 14px; }
+.free input { flex: 1; min-width: 0; font-family: Consolas, monospace; }
+
+main { grid-template-columns: 300px minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; grid-template-areas: "bar dev" "ctrl log" "ctrl free"; }
+.bar { flex-direction: column; align-items: stretch; }
+.link select { flex: 1; }
+.stats { grid-template-columns: repeat(4, 1fr); }
+.free { display: flex; }
+
+@media (max-width: 960px) {
+  main { height: auto; grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "bar" "dev" "ctrl" "log" "free"; }
+  .log-wrap { height: 45vh; flex: none; }
+  .dev { flex-direction: column; }
+}
